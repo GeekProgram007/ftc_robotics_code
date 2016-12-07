@@ -17,7 +17,7 @@ public class AutoMode extends LinearOpMode {
     // motors
     private DcMotor motorLeft;
     private DcMotor motorRight;
-    private DcMotor motorSpin;
+    private DcMotor motorSweeper;
     private DcMotor motorRevolve;
 
     // servos
@@ -32,17 +32,18 @@ public class AutoMode extends LinearOpMode {
 
     // power of motor
     public static final double POWER_FULL = 1.0;
+    public static final double POWER_SLOW = 0.2;
     public static final double POWER_STOP = 0.0;
     public static final double POWER_SCORER = 0.4;
 
     @Override
     public void runOpMode() throws InterruptedException {
 
-        motorLeft =     hardwareMap.dcMotor.get("motorLeft");
-        motorRight =    hardwareMap.dcMotor.get("motorRight");
-        motorSpin =     hardwareMap.dcMotor.get("motorSpin");
-        motorRevolve =  hardwareMap.dcMotor.get("motorRevolve");
-        servoArm =      hardwareMap.servo.get("servoArm");
+        motorLeft = hardwareMap.dcMotor.get("motorLeft");
+        motorRight = hardwareMap.dcMotor.get("motorRight");
+        motorSweeper = hardwareMap.dcMotor.get("motorSweeper");
+        motorRevolve = hardwareMap.dcMotor.get("motorRevolve");
+        servoArm = hardwareMap.servo.get("servoArm");
 
 
         // keeps the car going straight
@@ -55,7 +56,7 @@ public class AutoMode extends LinearOpMode {
         // // TODO: 12/6/16 -
         // // TODO: implement all methods matching the challenge
 
-        driveForwardTime(POWER_FULL,4000);
+        driveForwardTime(POWER_SLOW,4000);
 
         waitForStart();
 

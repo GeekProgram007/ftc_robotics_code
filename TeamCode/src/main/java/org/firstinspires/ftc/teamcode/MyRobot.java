@@ -22,7 +22,7 @@ public class MyRobot extends LinearOpMode {
     // motors
     private DcMotor motorLeft;
     private DcMotor motorRight;
-    private DcMotor motorSpin;
+    private DcMotor motorSweeper;
     private DcMotor motorRevolve;
 
     // servos
@@ -45,15 +45,9 @@ public class MyRobot extends LinearOpMode {
         ElapsedTime opmodeRunTime = new ElapsedTime();
         telemetry.log().setDisplayOrder(Telemetry.Log.DisplayOrder.NEWEST_FIRST);
 
-        while (!isStarted()) {
-            telemetry.addData("time", "%.1f seconds", opmodeRunTime.seconds());
-            telemetry.update();
-            idle();
-        }
-
         motorLeft = hardwareMap.dcMotor.get("motorLeft");
         motorRight = hardwareMap.dcMotor.get("motorRight");
-        motorSpin = hardwareMap.dcMotor.get("motorSpin");
+        motorSweeper = hardwareMap.dcMotor.get("motorSweeper");
         motorRevolve = hardwareMap.dcMotor.get("motorRevolve");
         servoArm = hardwareMap.servo.get("servoArm");
 
@@ -73,14 +67,13 @@ public class MyRobot extends LinearOpMode {
 
             double leftPowerUse = -gamepad1.left_stick_y;
             double rightPowerUse = -gamepad1.right_stick_y;
-            double spinPowerUse = motorSpin.getPower();
+            double spinPowerUse = motorSweeper.getPower();
             double revolvePowerUse = motorRevolve.getPower();
             double servoPosition = servoArm.getPosition();
 
-
-
-            motorLeft.setPower(leftPowerUse);
-            motorRight.setPower(rightPowerUse);
+            // reversed - probably assignment to port
+            motorLeft.setPower(rightPowerUse);
+            motorRight.setPower(leftPowerUse);
 
             if(gamepad2.a)
                 servoArm.setPosition(ARM_UPPER_POSITION);
@@ -89,11 +82,6 @@ public class MyRobot extends LinearOpMode {
 
             telemetry.addData("Hey", "*** Robot Data***");
             // As an illustration, show some loop timing information
-            telemetry.addData("voltage", "%.1f volts", new Func<Double>() {
-                @Override public Double value() {
-                    return getBatteryVoltage();
-                }
-            });
             telemetry.addData("loop count", loopCount);
             telemetry.addData("ms/loop", "%.3f ms", opmodeRunTime.milliseconds() / loopCount);
             // Show Robot Data Values
