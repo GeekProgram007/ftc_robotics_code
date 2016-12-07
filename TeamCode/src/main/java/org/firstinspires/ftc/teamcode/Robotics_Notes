@@ -1,0 +1,9 @@
+#10788
+
+This is our actual code folder:
+
+TODO:
+Connect phones with laptop and run the code
+Test the robot and its reactions to the controller
+Connect motors and servos with the code and ensure they run efficiently
+Test both MainTeleOpMode and AutonomousMode
