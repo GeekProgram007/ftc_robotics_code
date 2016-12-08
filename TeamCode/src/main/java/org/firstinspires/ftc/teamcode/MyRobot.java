@@ -85,15 +85,15 @@ public class MyRobot extends LinearOpMode {
 
             // sweeper (getting the ball)
             if(gamepad2.x)
-                motorSweeper.setPower(POWER_SCORER);
+                motorSweeper.setPower(POWER_FULL);
             if(gamepad2.y)
-                motorSweeper.setPower(-POWER_SCORER);
+                motorSweeper.setPower(-POWER_FULL);
 
             // revolveer (Throwing the ball?)
             if(gamepad1.left_bumper)
-                motorRevolve.setPower(POWER_SCORER);
+                motorRevolve.setPower(POWER_FULL);
             if(gamepad1.right_bumper)
-                motorRevolve.setPower(-POWER_SCORER);
+                motorRevolve.setPower(-POWER_FULL);
 
             telemetry.addData("Hey", "*** Robot Data***");
             // As an illustration, show some loop timing information
