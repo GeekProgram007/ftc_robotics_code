@@ -91,7 +91,7 @@ public class MyRobot extends LinearOpMode {
             if(gamepad2.y)
                 motorSweeper.setPower(-POWER_FULL);
 
-            // revolveer (Throwing the ball?)
+            // revolver (Throwing the ball?)
             if(gamepad1.left_bumper)
                 motorRevolve.setPower(POWER_FULL);
             if(gamepad1.right_bumper)
