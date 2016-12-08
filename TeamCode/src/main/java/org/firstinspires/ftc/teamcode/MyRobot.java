@@ -30,7 +30,7 @@ public class MyRobot extends LinearOpMode {
 
     // constants
 
-    public static final double ARM_UPPER_POSITION = 0.8;
+    public static final double ARM_UPPER_POSITION = 1.0;
     public static final double ARM_LOWER_POSITION = 0.2;
 
 
@@ -84,9 +84,9 @@ public class MyRobot extends LinearOpMode {
                 servoArm.setPosition(ARM_LOWER_POSITION);
 
             // sweeper (getting the ball)
-            if(gamepad1.x)
+            if(gamepad2.x)
                 motorSweeper.setPower(POWER_SCORER);
-            if(gamepad1.y)
+            if(gamepad2.y)
                 motorSweeper.setPower(-POWER_SCORER);
 
             // revolveer (Throwing the ball?)
