@@ -67,7 +67,7 @@ public class MyRobot extends LinearOpMode {
 
             double leftPowerUse = -gamepad1.left_stick_y;
             double rightPowerUse = -gamepad1.right_stick_y;
-            double spinPowerUse = motorSweeper.getPower();
+            double sweepPowerUse = motorSweeper.getPower();
             double revolvePowerUse = motorRevolve.getPower();
             double servoPosition = servoArm.getPosition();
 
@@ -75,10 +75,25 @@ public class MyRobot extends LinearOpMode {
             motorLeft.setPower(rightPowerUse);
             motorRight.setPower(leftPowerUse);
 
+            // sets power to different motors depending on the buttons pressed
+
+            // servoArms forward or back
             if(gamepad2.a)
                 servoArm.setPosition(ARM_UPPER_POSITION);
             if(gamepad2.b)
                 servoArm.setPosition(ARM_LOWER_POSITION);
+
+            // sweeper (getting the ball)
+            if(gamepad1.x)
+                motorSweeper.setPower(POWER_SCORER);
+            if(gamepad1.y)
+                motorSweeper.setPower(-POWER_SCORER);
+
+            // revolveer (Throwing the ball?)
+            if(gamepad1.left_bumper)
+                motorRevolve.setPower(POWER_SCORER);
+            if(gamepad1.right_bumper)
+                motorRevolve.setPower(-POWER_SCORER);
 
             telemetry.addData("Hey", "*** Robot Data***");
             // As an illustration, show some loop timing information
@@ -87,8 +102,8 @@ public class MyRobot extends LinearOpMode {
             // Show Robot Data Values
             telemetry.addData("left pwr", "left pwr: " + String.format("%.2f", leftPowerUse));
             telemetry.addData("right pwr", "right pwr: " + String.format("%.2f", rightPowerUse));
-            telemetry.addData("revolve pwr", "left pwr: " + String.format("%.2f", revolvePowerUse));
-            telemetry.addData("spin pwr", "right pwr: " + String.format("%.2f", spinPowerUse));
+            telemetry.addData("revolve pwr", "revolve pwr: " + String.format("%.2f", revolvePowerUse));
+            telemetry.addData("sweep pwr", "sweep pwr: " + String.format("%.2f", sweepPowerUse));
             telemetry.addData("servoArm pwr", "servoArm pwr: " + String.format("%.2f", servoPosition));
 
 
