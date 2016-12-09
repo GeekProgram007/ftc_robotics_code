@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
+import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.hardware.VoltageSensor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -32,17 +33,18 @@ public class MyRobot extends LinearOpMode {
 
     // constants
 
-    public static final double ARM_UPPER_POSITION = 1.0;
+    public static final double ARM_UPPER_POSITION = 0.8;
     public static final double ARM_LOWER_POSITION = 0.2;
 
 
     // power of motor
     public static final double POWER_FULL = 1.0;
     public static final double POWER_STOP = 0.0;
-    public static final double POWER_SCORER = 0.4;
+    public static final double POWER_SCORER = 0.1;
+    public static final double POWER_REVOLVE = 0.7;
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws  InterruptedException {
 
         ElapsedTime opmodeRunTime = new ElapsedTime();
         telemetry.log().setDisplayOrder(Telemetry.Log.DisplayOrder.NEWEST_FIRST);
@@ -69,7 +71,7 @@ public class MyRobot extends LinearOpMode {
 
             double leftPowerUse = -gamepad1.left_stick_y;
             double rightPowerUse = -gamepad1.right_stick_y;
-            double sweepPowerUse = motorSweeper.getPower();
+            double sweepPowerUse = -gamepad2.left_stick_y;
             double revolvePowerUse = motorRevolve.getPower();
             double servoPosition = servoArm.getPosition();
 
@@ -87,17 +89,22 @@ public class MyRobot extends LinearOpMode {
 
             // sweeper (getting the ball)
             if(gamepad2.x)
-                motorSweeper.setPower(POWER_FULL);
+                motorSweeper.setPower(POWER_SCORER);
             if(gamepad2.y)
-                motorSweeper.setPower(-POWER_FULL);
+                motorSweeper.setPower(-POWER_SCORER);
+            if(gamepad2.right_bumper)
+                motorSweeper.setPower(POWER_STOP);
 
             // revolver (Throwing the ball?)
-            if(gamepad1.left_bumper)
-                motorRevolve.setPower(POWER_FULL);
-            if(gamepad1.right_bumper)
-                motorRevolve.setPower(-POWER_FULL);
+            if(gamepad1.left_bumper) {
+                setPowerTime(-POWER_FULL,1000);
+                setPower(-0);
 
-            telemetry.addData("Hey", "*** Robot Data***");
+            }
+
+
+
+            telemetry.addData("Data", "*** Robot Data***");
             // As an illustration, show some loop timing information
             telemetry.addData("loop count", loopCount);
             telemetry.addData("ms/loop", "%.3f ms", opmodeRunTime.milliseconds() / loopCount);
@@ -120,15 +127,18 @@ public class MyRobot extends LinearOpMode {
 
     }
 
-    double getBatteryVoltage() {
-        double result = Double.POSITIVE_INFINITY;
-        for (VoltageSensor sensor : hardwareMap.voltageSensor) {
-            double voltage = sensor.getVoltage();
-            if (voltage > 0) {
-                result = Math.min(result, voltage);
-            }
-        }
-        return result;
+
+    public void setPower(double power) {
+
+        motorRevolve.setPower(power);
+
+    }
+
+    public void setPowerTime(double power, long time) throws InterruptedException {
+
+        setPower(power);
+        Thread.sleep(time);
+
     }
 
 }
