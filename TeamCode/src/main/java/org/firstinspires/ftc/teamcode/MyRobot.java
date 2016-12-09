@@ -15,7 +15,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 /**
  * Created by SmartZalmover on 12/5/16.
  * MainTeleOpMode for #10788
- * @version verison 0.901
+ * @version verison 1.00
  * @author Alik Zalmover
  */
 
