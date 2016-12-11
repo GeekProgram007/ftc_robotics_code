@@ -76,8 +76,8 @@ public class MyRobot extends LinearOpMode {
             double servoPosition = servoArm.getPosition();
 
             // reversed - wierd!
-            motorLeft.setPower(leftPowerUse );
-            motorRight.setPower(rightPowerUse);
+            motorLeft.setPower(rightPowerUse);
+            motorRight.setPower(leftPowerUse);
 
             // sets power to different motors depending on the buttons pressed
 
@@ -109,8 +109,10 @@ public class MyRobot extends LinearOpMode {
             telemetry.addData("loop count", loopCount);
             telemetry.addData("ms/loop", "%.3f ms", opmodeRunTime.milliseconds() / loopCount);
             // Show Robot Data Values
-            telemetry.addData("left pwr", "left pwr: " + String.format("%.2f", leftPowerUse));
-            telemetry.addData("right pwr", "right pwr: " + String.format("%.2f", rightPowerUse));
+            telemetry.addData("left controller pwr", "left pwr: " + String.format("%.2f", leftPowerUse));
+            telemetry.addData("right contrller pwr", "right pwr: " + String.format("%.2f", rightPowerUse));
+            telemetry.addData("left motor pwr", "left pwr: " + String.format("%.2f", motorLeft.getPower()));
+            telemetry.addData("right motor pwr", "right pwr: " + String.format("%.2f", motorRight.getPower()));
             telemetry.addData("revolve pwr", "revolve pwr: " + String.format("%.2f", revolvePowerUse));
             telemetry.addData("sweep pwr", "sweep pwr: " + String.format("%.2f", sweepPowerUse));
             telemetry.addData("servoArm pwr", "servoArm pwr: " + String.format("%.2f", servoPosition));
