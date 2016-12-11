@@ -75,9 +75,9 @@ public class MyRobot extends LinearOpMode {
             double revolvePowerUse = motorRevolve.getPower();
             double servoPosition = servoArm.getPosition();
 
-            // reversed - probably assignment to port
-            motorLeft.setPower(rightPowerUse);
-            motorRight.setPower(leftPowerUse);
+            // reversed - wierd!
+            motorLeft.setPower(leftPowerUse );
+            motorRight.setPower(rightPowerUse);
 
             // sets power to different motors depending on the buttons pressed
 
