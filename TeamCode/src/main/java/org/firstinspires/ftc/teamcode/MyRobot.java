@@ -33,7 +33,7 @@ public class MyRobot extends LinearOpMode {
 
     // constants
 
-    public static final double ARM_UPPER_POSITION = 0.8;
+    public static final double ARM_UPPER_POSITION = 1.0;
     public static final double ARM_LOWER_POSITION = 0.2;
 
 
