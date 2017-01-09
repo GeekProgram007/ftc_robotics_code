@@ -54,10 +54,17 @@ public class AutoMode extends LinearOpMode {
         raiseArm();
 
         // DRIVE
-        // // TODO: 12/6/16 -
-        // // TODO: implement all methods matching the challenge
+        // TODO: 12/6/16 -
+        // TODO: implement all methods matching the challenge
+        // TODO: make Bo push the big ball
+        // TODO: make Bo get onto the ramp
+        // TODO: Test on Field if possible
 
-        driveForwardTime(POWER_SLOW,4000);
+        driveForwardTime(POWER_FULL,2000);
+
+        driveReverseTime(POWER_SLOW,500);
+
+        turnLeftTime(POWER_SLOW,1000);
 
         waitForStart();
 
@@ -87,6 +94,13 @@ public class AutoMode extends LinearOpMode {
     public void driveForwardTime(double power, long time) throws InterruptedException {
 
         driveForward(power);
+        Thread.sleep(time);
+
+    }
+
+    public void driveReverseTime(double power, long time) throws InterruptedException {
+
+        driveForward(-power);
         Thread.sleep(time);
 
     }

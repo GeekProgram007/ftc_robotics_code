@@ -19,6 +19,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
  * @author Alik Zalmover
  */
 
+// TODO: Implement methods on new hardware if needed (e.g new functions)
+
 @TeleOp (name = "MainTeleOp")
 public class MyRobot extends LinearOpMode {
 
