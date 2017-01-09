@@ -35,15 +35,14 @@ public class MyRobot extends LinearOpMode {
 
     // constants
 
-    public static final double ARM_UPPER_POSITION = 1.0;
-    public static final double ARM_LOWER_POSITION = 0.2;
+    public static final double ARM_UPPER_POSITION = 0.8;
+    public static final double ARM_LOWER_POSITION = 0.4;
 
 
     // power of motor
     public static final double POWER_FULL = 1.0;
     public static final double POWER_STOP = 0.0;
     public static final double POWER_SCORER = 0.1;
-    public static final double POWER_REVOLVE = 0.7;
 
     @Override
     public void runOpMode() throws  InterruptedException {
@@ -91,15 +90,16 @@ public class MyRobot extends LinearOpMode {
 
             // sweeper (getting the ball)
             if(gamepad2.x)
-                motorSweeper.setPower(POWER_SCORER);
+                motorSweeper.setPower(POWER_FULL);
             if(gamepad2.y)
-                motorSweeper.setPower(-POWER_SCORER);
+                motorSweeper.setPower(-POWER_FULL);
             if(gamepad2.right_bumper)
                 motorSweeper.setPower(POWER_STOP);
 
             // revolver (Throwing the ball?)
             if(gamepad1.left_bumper) {
                 setPowerTime(-POWER_FULL,1000);
+                setPowerTime(-0.01,500);
                 setPower(-0);
 
             }
